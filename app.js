@@ -1,3 +1,4 @@
+const res = await fetch('itinerary.json?v=2');
 async function loadItinerary() {
   try {
     const res = await fetch('itinerary.json');
@@ -69,3 +70,4 @@ async function loadItinerary() {
 }
 
 loadItinerary();
+
