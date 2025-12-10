@@ -8,34 +8,34 @@ async function loadItinerary() {
 
     function showDetails(day) {
       details.innerHTML = `
-        <h2>Day ${day.day} – ${day.city}, ${day.country}</h2>
+        <h2>第 ${day.day} 天 – ${day.city}（${day.country}）</h2>
         <div class="meta">
-          <span class="badge">${day.date}</span>
-          <span class="badge">${day.theme}</span>
-          <span class="badge">Hotel: ${day.hotel}</span>
+          <span class="badge">日期：${day.date}</span>
+          <span class="badge">主題：${day.theme}</span>
+          <span class="badge">酒店：${day.hotel}</span>
         </div>
         <div class="detail-block">
-          <h3>Plan</h3>
+          <h3>行程重點</h3>
           <p>${day.plan}</p>
         </div>
         <div class="detail-block">
-          <h3>Transport</h3>
+          <h3>交通建議</h3>
           <p>${day.transportTip}</p>
         </div>
         <div class="detail-block">
-          <h3>Food / Restaurant idea</h3>
+          <h3>餐廳／美食建議</h3>
           <p>${day.foodTip}</p>
         </div>
         <div class="detail-block">
-          <h3>Must do</h3>
+          <h3>必做事項</h3>
           <p>${day.mustDo}</p>
         </div>
         <div class="detail-block">
-          <h3>Must buy</h3>
+          <h3>必買／伴手禮建議</h3>
           <p>${day.mustBuy}</p>
         </div>
         <div class="detail-block">
-          <h3>Expected weather</h3>
+          <h3>預期天氣（平均氣候）</h3>
           <p>${day.weather}</p>
         </div>
       `;
@@ -43,7 +43,9 @@ async function loadItinerary() {
 
     days.forEach(day => {
       const btn = document.createElement('button');
-      btn.textContent = `${day.day}: ${day.city}`;
+      // 顯示：12/13 米蘭（第 1 天）
+      const mmdd = day.date.substring(5).replace("-", "/");
+      btn.textContent = `${mmdd} ${day.city}（第 ${day.day} 天）`;
       btn.addEventListener('click', () => {
         document
           .querySelectorAll('#timeline button')
@@ -61,7 +63,7 @@ async function loadItinerary() {
     }
   } catch (err) {
     document.getElementById('details').innerHTML =
-      '<p>Failed to load itinerary. Please check that itinerary.json is present.</p>';
+      '<p>行程載入失敗，請確認 itinerary.json 是否存在且格式正確。</p>';
     console.error(err);
   }
 }
